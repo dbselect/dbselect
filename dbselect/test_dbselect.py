@@ -125,5 +125,43 @@ class TestDBSelect(unittest.TestCase):
         self.assertEqual(sql, "select * from employee where rownum <= 100 and code between '2008-01-01' and '2018-12-31'")
 
 
+    def test70(self):
+        sql = self.dbselect.generate_select('employee',{'code':['gt','123']})
+        self.assertEqual(sql,'select * from employee where rownum <= 100 and code > 123')
+
+    def test71(self):
+        sql = self.dbselect.generate_select('employee',{'order_by':'','code':['gt','123']})
+        self.assertEqual(sql, 'select * from employee where rownum <= 100 and code > 123')
+
+    def test72(self):
+        sql = self.dbselect.generate_select('employee',{'order_by':'','code':['eq','MT']})
+        self.assertEqual(sql, "select * from employee where rownum <= 100 and code = 'MT'")
+
+    def test73(self):
+        sql = self.dbselect.generate_select('employee',{'order_by':'','code':['in','MT','TD']})
+        self.assertEqual(sql, "select * from employee where rownum <= 100 and code in ('MT','TD')")
+
+    def test74(self):
+        sql = self.dbselect.generate_select('employee',{'order_by':'','code':['in','MT','TD','AB']})
+        self.assertEqual(sql, "select * from employee where rownum <= 100 and code in ('MT','TD','AB')")
+
+    def test75(self):
+        sql = self.dbselect.generate_select('employee',{'order_by':'','code':['in','10','20']})
+        self.assertEqual(sql, "select * from employee where rownum <= 100 and code in (10,20)")
+
+    def test76(self):
+        sql = self.dbselect.generate_select('employee',{'order_by':'','code':['in','10','20','15']})
+        self.assertEqual(sql, "select * from employee where rownum <= 100 and code in (10,20,15)")
+
+    def test77(self):
+        sql = self.dbselect.generate_select('employee',{'order_by':'','code':['btw','10','20']})
+        self.assertEqual(sql, "select * from employee where rownum <= 100 and code between 10 and 20")
+
+    def test78(self):
+        sql = self.dbselect.generate_select('employee',{'order_by':'','code':['btw','2008-01-01','2018-12-31']})
+        self.assertEqual(sql, "select * from employee where rownum <= 100 and code between '2008-01-01' and '2018-12-31'")
+
+
+
     if __name__ == '__main__':
         unittest.main()
