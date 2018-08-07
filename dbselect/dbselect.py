@@ -82,9 +82,11 @@ class DBSelect:
 
                 if value:
 
-                    value = value.split(',')
+                    # if str then convert to list
+                    if type(value)== str:
+                        value = value.split(',')
 
-                    # if str then zero operand case
+                    # if list length is 1 then zero operand case
                     if len(value) == 1:
                         operator = self.ZERO_OPERAND_OPERATORS.get(value)
                         where_clause = where_clause + ' and ' + key + ' ' + operator
