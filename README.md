@@ -5,7 +5,7 @@ Generate SQL select statement
 
 ```python
 from dbselect import dbselect
-sql = dbselect.generate_select('employee')
+sql = dbselect.generate('employee')
 print(sql)
 ```
 results in 
@@ -17,7 +17,7 @@ select * from employee
 However if we want to select some specific columns only (say name and hire_date) then we need to pass a dictionary object containing a `'columns'` key with `'name,hire_date'` as value 
 
 ```python
-sql = dbselect.generate_select('employee', {'columns': 'name,hire_date'})
+sql = dbselect.generate('employee', {'columns': 'name,hire_date'})
 ```
 results in 
 
