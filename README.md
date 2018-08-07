@@ -29,7 +29,7 @@ Dictionary object supports the following keys:
 
 Key | Description | Example
 ----|-------------|---------
-columns | Specify list of columns to be selected | `'columns':'name,hire_date'` or `'columns':['name','hire_date']`
-order_by | Specify list of columns to be used for ordering | `'order_by':'name'` or `'order_by':['name']`
+columns | Specify list of columns to be selected | `'columns':'name,hire_date'` or <br> `'columns':['name','hire_date']`
+order_by | Specify list of columns to be used for ordering | `'order_by':'name'` or <br> `'order_by':['name']`
 
 
