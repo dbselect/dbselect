@@ -31,5 +31,7 @@ Key | Description | Example
 ----|-------------|---------
 columns | Specify list of columns to be selected | `'columns':'name,hire_date'` or <br> `'columns':['name','hire_date']`
 order_by | Specify list of columns to be used for ordering | `'order_by':'name'` or <br> `'order_by':['name']`
+asc_desc | Specify ascending or descending order of given order by columns | `'asc_desc':'desc'` or <br> `'asc_desc':['desc']`
+limit | Specify the maximum rows the select statement should return (defaults to 1000) | `'limit':'10000'`
 
 
