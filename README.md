@@ -14,7 +14,7 @@ results in
 select * from employee
 ```
 
-However if we want to select some specific columns only (say name and hire_date) then we need to pass a dictionary object containing a `'columns'` key with `'name,hire_date'` as value 
+However if we want to select some specific columns only (say name and hire_date) then we need to pass a configuration object (a dict) containing a `'columns'` key with `'name,hire_date'` as value 
 
 ```python
 sql = dbselect.generate('employee', {'columns': 'name,hire_date'})
@@ -25,7 +25,7 @@ results in
 select name,hire_date from employee
 ```
 
-Dictionary object supports the following keys:
+The configuration object (a dict) supports the following keys:
 
 Key | Description | Example
 ----|-------------|---------
@@ -34,4 +34,5 @@ order_by | Specify list of columns to be used for ordering | `'order_by':'name'`
 asc_desc | Specify ascending or descending order of given order by columns | `'asc_desc':'desc'` or <br> `'asc_desc':['desc']`
 limit | Specify the maximum rows the select statement should return (defaults to 1000) | `'limit':'10000'`
 
+The above 'keys' are considered standard keys of the configuration object. Any other keys defined in the configuraiton object are considered row filters i.e. they are added to the where clause.
 
