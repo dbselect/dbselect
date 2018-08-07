@@ -124,6 +124,10 @@ class TestDBSelect(unittest.TestCase):
         sql = self.dbselect.generate_select('employee',{'order_by':'','code':'btw,2008-01-01,2018-12-31'})
         self.assertEqual(sql, "select * from employee where rownum <= 100 and code between '2008-01-01' and '2018-12-31'")
 
+    def test62(self):
+        sql = self.dbselect.generate_select('employee',{'order_by':'','code':'btw,@sysdate-30,@sysdate'})
+        self.assertEqual(sql, "select * from employee where rownum <= 100 and code between sysdate-30 and sysdate")
+
 
     def test70(self):
         sql = self.dbselect.generate_select('employee',{'code':['gt','123']})
@@ -160,6 +164,10 @@ class TestDBSelect(unittest.TestCase):
     def test78(self):
         sql = self.dbselect.generate_select('employee',{'order_by':'','code':['btw','2008-01-01','2018-12-31']})
         self.assertEqual(sql, "select * from employee where rownum <= 100 and code between '2008-01-01' and '2018-12-31'")
+
+    def test79(self):
+        sql = self.dbselect.generate_select('employee',{'order_by':'','code':['btw','@sysdate-30','@sysdate']})
+        self.assertEqual(sql, "select * from employee where rownum <= 100 and code between sysdate-30 and sysdate")
 
 
 
