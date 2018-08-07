@@ -26,7 +26,7 @@ class DBSelect:
 
         self.LIMIT = limit
 
-    def generate_select(self, table_name, params):
+    def generate(self, table_name, params={}):
         """generate SQL select statements"""
 
         # get columns list
