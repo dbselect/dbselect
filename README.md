@@ -1,5 +1,5 @@
 # dbselect
-Generate SQL select statement
+A python package for generating SQL select statements. As the package name suggest, this package focuses only at generating the SQL select statements. 
 
 ## Usage:
 
