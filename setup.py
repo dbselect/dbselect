@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="dbselect",
-    version="0.0.1",
+    version="0.0.4",
     author="mmoiz",
     author_email="moizmuhammad@yahoo.com",
     description="Generate SQL select statement for given parameters",
