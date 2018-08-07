@@ -30,21 +30,21 @@ class DBSelect:
         """generate SQL select statements"""
 
         # get columns list
-        columns = self.get_columns(params)
+        columns = self._get_columns_(params)
 
         # get where clause
-        where_clause = self.get_where_clause(params)
+        where_clause = self._get_where_clause_(params)
 
         # get order by clause
-        order_by_clause = self.get_order_by_clause(params)
+        order_by_clause = self._get_order_by_clause_(params)
 
         # build sql
-        sql = 'select ' + self.clean(columns) + ' from ' + self.clean(table_name) + where_clause + order_by_clause
+        sql = 'select ' + self._clean_(columns) + ' from ' + self._clean_(table_name) + where_clause + order_by_clause
 
         print(sql)
         return sql
 
-    def get_columns(self, params):
+    def _get_columns_(self, params):
         """return comma separated column names or * """
 
         # fetch columns
@@ -67,7 +67,7 @@ class DBSelect:
 
         return columns
 
-    def get_where_clause(self, params):
+    def _get_where_clause_(self, params):
         """return where clause"""
 
         # get row limit
@@ -94,7 +94,7 @@ class DBSelect:
                     # single operand case
                     if len(value) == 2:
                         operator = self.SINGLE_OPERAND_OPERATORS.get(value[0])
-                        operand = self.get_value(value[1])
+                        operand = self._get_value_(value[1])
                         where_clause = where_clause +  ' and ' + key + ' ' + operator + ' ' + operand
 
                     # multiple operands case
@@ -104,7 +104,7 @@ class DBSelect:
                         for val in value[1:]:
                             if operands != '':
                                 operands = operands + ','
-                            operands = operands + self.get_value(val)
+                            operands = operands + self._get_value_(val)
 
                         if value[0] == 'in':
 
@@ -116,11 +116,11 @@ class DBSelect:
 
                         elif value[0] == 'btw':
 
-                            where_clause = where_clause + ' and ' + key + ' between ' + self.get_value(value[1]) + ' and ' + self.get_value(value[2])
+                            where_clause = where_clause + ' and ' + key + ' between ' + self._get_value_(value[1]) + ' and ' + self._get_value_(value[2])
 
         return where_clause
 
-    def get_order_by_clause(self, params):
+    def _get_order_by_clause_(self, params):
         """return order by clause"""
 
         # initialize
@@ -159,17 +159,16 @@ class DBSelect:
 
         return order_by_clause
 
-    def get_value(self, text):
-        """checks whether the text value is numeric. If not then returns quoted text string else the same text string"""
+    def _get_value_(self, text):
+        """checks whether the text value is numeric. Or if text value starts @ symbol then return text after first letter else returns quoted text string else the same text string"""
 
         if text.isnumeric():
-
            return text
-
+        elif  text[0] == '@':
+            return text[1:]
         else:
-
            return "'" + text + "'"
 
-    def clean(self,text):
+    def _clean_(self, text):
         """removes spaces and reserved words"""
         return text.replace(' ','')
